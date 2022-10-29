@@ -8,21 +8,6 @@ using namespace std;
 
 void get_URL(const string &host, const string &path) {
     // Your code here.
-
-    TCPSocket socket1;
-    socket1.connect(Address(host, "http"));
-    // const string get_request = "GET " + path + " HTTP/1.1\r\n" + "HOST: " + host + "\r\n\r\n";
-    // socket1.write(get_request);
-    socket1.write("GET " + path + " HTTP/1.1\r\n");
-    socket1.write("HOST: " + host + "\r\n");
-    // socket1.write("\r\n");
-    socket1.write("Connection: close\r\n\r\n");
-    socket1.shutdown(SHUT_WR);  // Mark the end of socket communication
-    while (!socket1.eof()) {
-        cout << socket1.read();
-    }
-    socket1.close();
-
     // You will need to connect to the "http" service on
     // the computer whose name is in the "host" string,
     // then request the URL path given in the "path" string.
@@ -30,6 +15,16 @@ void get_URL(const string &host, const string &path) {
     // Then you'll need to print out everything the server sends back,
     // (not just one call to read() -- everything) until you reach
     // the "eof" (end of file).
+    TCPSocket socket1;
+    socket1.connect(Address(host, "http"));
+    socket1.write("GET " + path + " HTTP/1.1\r\n");
+    socket1.write("HOST: " + host + "\r\n");
+    socket1.write("Connection: close\r\n\r\n");
+    socket1.shutdown(SHUT_WR);  // Mark the end of socket communication
+    while (!socket1.eof()) {
+        cout << socket1.read();
+    }
+    socket1.close();
 
     cerr << "Function called: get_URL(" << host << ", " << path << ").\n";
     cerr << "Warning: get_URL() has not been implemented yet.\n";
