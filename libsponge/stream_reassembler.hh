@@ -41,6 +41,7 @@ class StreamReassembler {
     void push_substring(const std::string &data, const uint64_t index, const bool eof);
     
     void write_to_bytestream();
+    size_t ack_index() const;
     //! \name Access the reassembled byte stream
     //!@{
     const ByteStream &stream_out() const { return _output; }
