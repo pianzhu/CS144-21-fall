@@ -36,16 +36,16 @@ struct TCPHeader {
     //!@{
     uint16_t sport = 0;         //!< source port
     uint16_t dport = 0;         //!< destination port
-    WrappingInt32 seqno{0};     //!< sequence number
-    WrappingInt32 ackno{0};     //!< ack number
+    WrappingInt32 seqno{0};     //!< sequence number ====
+    WrappingInt32 ackno{0};     //!< ack number  ====
     uint8_t doff = LENGTH / 4;  //!< data offset
     bool urg = false;           //!< urgent flag
-    bool ack = false;           //!< ack flag
+    bool ack = false;           //!< ack flag  ====
     bool psh = false;           //!< push flag
     bool rst = false;           //!< rst flag
-    bool syn = false;           //!< syn flag
-    bool fin = false;           //!< fin flag
-    uint16_t win = 0;           //!< window size
+    bool syn = false;           //!< syn flag  ====
+    bool fin = false;           //!< fin flag  ====
+    uint16_t win = 0;           //!< window size ====
     uint16_t cksum = 0;         //!< checksum
     uint16_t uptr = 0;          //!< urgent pointer
     //!@}
