@@ -42,7 +42,6 @@ class TCPSender {
     bool _retransmission_running = false;
     std::queue<TCPSegment> _segments_outstanding{};
 
-    // bool ackno_vaild(uint64_t abs_ack_no);
     void send_tcp_segment(TCPSegment &seg);
   public:
     //! Initialize a TCPSender
