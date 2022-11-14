@@ -28,7 +28,7 @@ class TCPConnection {
     //! send_data() push segment from segment_out in sender peer to segment_out in tcp connectio,
     //! and set ackno if ack flag exists
     void send_data();
-
+    void unclean_shutdown();
   public:
     //! \name "Input" interface for the writer
     //!@{
