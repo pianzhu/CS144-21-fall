@@ -37,12 +37,7 @@ void TCPSender::fill_window() {
     {
         return;
     }
-    // If _stream is empty but input has not ended, do nothing.
-    if (!_stream.buffer_size() && !_stream.eof())
-    {
-        // Lab4 behavior: if incoming_seg.length_in_sequence_space() is not zero, send ack.
-        return;
-    }
+    
     if (_has_fin) {
         return;
     }

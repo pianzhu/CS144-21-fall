@@ -64,7 +64,7 @@ void TCPConnection::segment_received(const TCPSegment &seg) {
     else if (_sender.next_seqno_absolute() > _sender.bytes_in_flight() && !_sender.stream_in().eof()) {
         _receiver.segment_received(seg);
         _sender.ack_received(seg.header().ackno, seg.header().win);
-        if (seg.length_in_sequence_space() > 0) {
+        if (!_sender.segments_out().size() && seg.length_in_sequence_space()) {
             _sender.send_empty_segment();
         }
         connect();
