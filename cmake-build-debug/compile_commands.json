@@ -11,6 +11,11 @@
 },
 {
   "directory": "/home/hog/cs144/lab0/sponge/cmake-build-debug/libsponge",
+  "command": "/usr/bin/c++  -I/home/hog/cs144/lab0/sponge/libsponge/util -I/home/hog/cs144/lab0/sponge/libsponge/tcp_helpers -I/home/hog/cs144/lab0/sponge/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -g -ggdb3 -g -std=gnu++17 -o CMakeFiles/sponge.dir/router.cc.o -c /home/hog/cs144/lab0/sponge/libsponge/router.cc",
+  "file": "/home/hog/cs144/lab0/sponge/libsponge/router.cc"
+},
+{
+  "directory": "/home/hog/cs144/lab0/sponge/cmake-build-debug/libsponge",
   "command": "/usr/bin/c++  -I/home/hog/cs144/lab0/sponge/libsponge/util -I/home/hog/cs144/lab0/sponge/libsponge/tcp_helpers -I/home/hog/cs144/lab0/sponge/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -g -ggdb3 -g -std=gnu++17 -o CMakeFiles/sponge.dir/stream_reassembler.cc.o -c /home/hog/cs144/lab0/sponge/libsponge/stream_reassembler.cc",
   "file": "/home/hog/cs144/lab0/sponge/libsponge/stream_reassembler.cc"
 },
@@ -178,6 +183,21 @@
   "directory": "/home/hog/cs144/lab0/sponge/cmake-build-debug/apps",
   "command": "/usr/bin/c++  -I/home/hog/cs144/lab0/sponge/libsponge/util -I/home/hog/cs144/lab0/sponge/libsponge/tcp_helpers -I/home/hog/cs144/lab0/sponge/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -g -ggdb3 -g -std=gnu++17 -o CMakeFiles/tcp_benchmark.dir/tcp_benchmark.cc.o -c /home/hog/cs144/lab0/sponge/apps/tcp_benchmark.cc",
   "file": "/home/hog/cs144/lab0/sponge/apps/tcp_benchmark.cc"
+},
+{
+  "directory": "/home/hog/cs144/lab0/sponge/cmake-build-debug/apps",
+  "command": "/usr/bin/c++  -I/home/hog/cs144/lab0/sponge/libsponge/util -I/home/hog/cs144/lab0/sponge/libsponge/tcp_helpers -I/home/hog/cs144/lab0/sponge/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -g -ggdb3 -g -std=gnu++17 -o CMakeFiles/network_simulator.dir/network_simulator.cc.o -c /home/hog/cs144/lab0/sponge/apps/network_simulator.cc",
+  "file": "/home/hog/cs144/lab0/sponge/apps/network_simulator.cc"
+},
+{
+  "directory": "/home/hog/cs144/lab0/sponge/cmake-build-debug/apps",
+  "command": "/usr/bin/c++  -I/home/hog/cs144/lab0/sponge/libsponge/util -I/home/hog/cs144/lab0/sponge/libsponge/tcp_helpers -I/home/hog/cs144/lab0/sponge/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -g -ggdb3 -g -std=gnu++17 -o CMakeFiles/lab7.dir/lab7.cc.o -c /home/hog/cs144/lab0/sponge/apps/lab7.cc",
+  "file": "/home/hog/cs144/lab0/sponge/apps/lab7.cc"
+},
+{
+  "directory": "/home/hog/cs144/lab0/sponge/cmake-build-debug/apps",
+  "command": "/usr/bin/c++  -I/home/hog/cs144/lab0/sponge/libsponge/util -I/home/hog/cs144/lab0/sponge/libsponge/tcp_helpers -I/home/hog/cs144/lab0/sponge/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -g -ggdb3 -g -std=gnu++17 -o CMakeFiles/bouncer.dir/bouncer.cc.o -c /home/hog/cs144/lab0/sponge/apps/bouncer.cc",
+  "file": "/home/hog/cs144/lab0/sponge/apps/bouncer.cc"
 },
 {
   "directory": "/home/hog/cs144/lab0/sponge/cmake-build-debug/tests",

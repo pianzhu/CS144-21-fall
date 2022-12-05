@@ -47,16 +47,15 @@ void TCPConnection::segment_received(const TCPSegment &seg) {
             _sender.ack_received(seg.header().ackno, seg.header().win);
             _sender.send_empty_segment();
             send_data();
-        }
-        else if (seg.header().syn && !seg.header().ack) {
+        } else if (seg.header().syn && !seg.header().ack) {
             _receiver.segment_received(seg);
             _sender.send_empty_segment();
             send_data();
         }
     }
     //! syn-revd state
-    else if (_sender.next_seqno_absolute() == bytes_in_flight() && _receiver.ackno().has_value()
-             && !_receiver.stream_out().input_ended()) {
+    else if (_sender.next_seqno_absolute() == bytes_in_flight() && _receiver.ackno().has_value() &&
+             !_receiver.stream_out().input_ended()) {
         _receiver.segment_received(seg);
         _sender.ack_received(seg.header().ackno, seg.header().win);
     }
@@ -70,8 +69,7 @@ void TCPConnection::segment_received(const TCPSegment &seg) {
         connect();
     }
     // Fin-wait-1 state
-    else if (_sender.stream_in().eof()
-             && _sender.bytes_in_flight() != 0 && !_receiver.stream_out().input_ended()) {
+    else if (_sender.stream_in().eof() && _sender.bytes_in_flight() != 0 && !_receiver.stream_out().input_ended()) {
         //! closing or time-wait state
         if (seg.header().fin) {
             _receiver.segment_received(seg);
@@ -87,24 +85,21 @@ void TCPConnection::segment_received(const TCPSegment &seg) {
         }
     }
     //! fin-wait-2 state
-    else if (_sender.stream_in().eof()
-             && _sender.bytes_in_flight() == 0 && !_receiver.stream_out().input_ended()) {
+    else if (_sender.stream_in().eof() && _sender.bytes_in_flight() == 0 && !_receiver.stream_out().input_ended()) {
         _receiver.segment_received(seg);
         _sender.send_empty_segment();
         send_data();
     }
     //! time-wait state
-    else if (_sender.stream_in().eof()
-             && _sender.bytes_in_flight() == 0 && _receiver.stream_out().input_ended()) {
+    else if (_sender.stream_in().eof() && _sender.bytes_in_flight() == 0 && _receiver.stream_out().input_ended()) {
         if (seg.header().fin) {
             _receiver.segment_received(seg);
             _sender.send_empty_segment();
             send_data();
         }
-    }
-    else {
+    } else {
         _receiver.segment_received(seg);
-        _sender.ack_received(seg.header().ackno, seg.header().win); 
+        _sender.ack_received(seg.header().ackno, seg.header().win);
         connect();
     }
 }
@@ -158,8 +153,7 @@ void TCPConnection::send_data() {
     if (_receiver.stream_out().input_ended()) {
         if (!_sender.stream_in().eof()) {
             _linger_after_streams_finish = false;
-        }
-        else if (_sender.bytes_in_flight() == 0) {
+        } else if (_sender.bytes_in_flight() == 0) {
             if (!_linger_after_streams_finish || time_since_last_segment_received() >= 10 * _cfg.rt_timeout) {
                 _active = false;
             }
@@ -168,7 +162,7 @@ void TCPConnection::send_data() {
 }
 
 void TCPConnection::connect() {
-    _sender.fill_window(); //! fill_window() push data out of byteStream and wrap it into segment_out 
+    _sender.fill_window();  //! fill_window() push data out of byteStream and wrap it into segment_out
     send_data();
 }
 

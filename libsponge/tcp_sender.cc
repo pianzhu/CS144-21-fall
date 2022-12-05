@@ -33,15 +33,14 @@ void TCPSender::fill_window() {
         send_tcp_segment(_tcp_segment);
         return;
     }
-    if (!_segments_outstanding.empty() && _segments_outstanding.front().header().syn)
-    {
+    if (!_segments_outstanding.empty() && _segments_outstanding.front().header().syn) {
         return;
     }
-    
+
     if (_has_fin) {
         return;
     }
-    
+
     size_t _window_size = _receiver_window_size > 0 ? _receiver_window_size : 1;
     //! stream is empty and the payload is full, but the fin is not sent
     if (_stream.eof() && _window_size - _next_seqno + _receive_ackno > 0) {
@@ -58,8 +57,9 @@ void TCPSender::fill_window() {
         if (_window_size - _next_seqno + _receive_ackno < 1) {
             break;
         }
-        size_t _payload_size = min({TCPConfig::MAX_PAYLOAD_SIZE, _stream.buffer_size(),
-                                    static_cast<size_t>(_window_size - _next_seqno + _receive_ackno)}); 
+        size_t _payload_size = min({TCPConfig::MAX_PAYLOAD_SIZE,
+                                    _stream.buffer_size(),
+                                    static_cast<size_t>(_window_size - _next_seqno + _receive_ackno)});
         _tcp_segment.payload() = _stream.read(_payload_size);
         //! judge the situation where fin can be sent
         if (_stream.eof() && _window_size > _tcp_segment.length_in_sequence_space()) {
@@ -93,8 +93,7 @@ void TCPSender::ack_received(const WrappingInt32 ackno, const uint16_t window_si
             _segments_outstanding.pop();
             _bytes_in_flight -= _unackno_seg.length_in_sequence_space();
             _has_pop_segments = true;
-        }
-        else {
+        } else {
             break;
         }
     }
@@ -105,8 +104,7 @@ void TCPSender::ack_received(const WrappingInt32 ackno, const uint16_t window_si
     _rto = _initial_retransmission_timeout;
     if (_segments_outstanding.empty()) {
         _retransmission_running = false;
-    }
-    else {
+    } else {
         _retransmission_time_elapsed = 0;
         _retransmission_running = true;
     }

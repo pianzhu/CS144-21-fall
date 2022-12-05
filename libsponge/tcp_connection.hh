@@ -20,15 +20,16 @@ class TCPConnection {
     //! for 10 * _cfg.rt_timeout milliseconds after both streams have ended,
     //! in case the remote TCPConnection doesn't know we've received its whole stream?
     bool _linger_after_streams_finish{true};
-    
+
     size_t _time_since_last_segment_received{0};
     bool _active{true};
-    
+
     //! it's a helper function
     //! send_data() push segment from segment_out in sender peer to segment_out in tcp connectio,
     //! and set ackno if ack flag exists
     void send_data();
     void unclean_shutdown();
+
   public:
     //! \name "Input" interface for the writer
     //!@{

@@ -41,6 +41,15 @@
 			"id" : "tidy_quiet_apps__bidirectional_stream_copy.cc::@6890427a1f51a3e7e1df"
 		},
 		{
+			"id" : "tidy_quiet_apps__bouncer.cc::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "tidy_quiet_apps__lab7.cc::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "tidy_quiet_apps__network_simulator.cc::@6890427a1f51a3e7e1df"
+		},
+		{
 			"id" : "tidy_quiet_apps__tcp_benchmark.cc::@6890427a1f51a3e7e1df"
 		},
 		{
@@ -99,6 +108,9 @@
 		},
 		{
 			"id" : "tidy_quiet_libsponge__network_interface.cc::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "tidy_quiet_libsponge__router.cc::@6890427a1f51a3e7e1df"
 		},
 		{
 			"id" : "tidy_quiet_libsponge__stream_reassembler.cc::@6890427a1f51a3e7e1df"

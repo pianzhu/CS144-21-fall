@@ -2,24 +2,24 @@
 #define SPONGE_LIBSPONGE_STREAM_REASSEMBLER_HH
 
 #include "byte_stream.hh"
-#include <iostream>
-#include <string>
+
 #include <algorithm>
 #include <cstdint>
-#include <string>
 #include <deque>
+#include <iostream>
+#include <string>
 
 //! \brief A class that assembles a series of excerpts from a byte stream (possibly out of order,
 //! possibly overlapping) into an in-order byte stream.
 class StreamReassembler {
   private:
     // Your code here -- add private members as necessary.
-    std::deque<char> _slide_window; // slide window that stores these unassembled strings.
+    std::deque<char> _slide_window;  // slide window that stores these unassembled strings.
     std::deque<bool> _slide_window_map;
     // size_t _unread_p; // point the location of the first index of unread string.
     size_t _unassembled_size;
-    size_t _unassembled_p; // point the location of the first index of unassembled string.
-    bool _eof_end; // mark whether string is over.
+    size_t _unassembled_p;  // point the location of the first index of unassembled string.
+    bool _eof_end;          // mark whether string is over.
 
     ByteStream _output;  //!< The reassembled in-order byte stream
     size_t _capacity;    //!< The maximum number of bytes
@@ -39,7 +39,7 @@ class StreamReassembler {
     //! \param index indicates the index (place in sequence) of the first byte in `data`
     //! \param eof the last byte of `data` will be the last byte in the entire stream
     void push_substring(const std::string &data, const uint64_t index, const bool eof);
-    
+
     void write_to_bytestream();
     size_t ack_index() const;
     //! \name Access the reassembled byte stream

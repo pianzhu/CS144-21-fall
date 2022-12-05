@@ -12,9 +12,8 @@ void DUMMY_CODE(Targs &&... /* unused */) {}
 
 using namespace std;
 
-ByteStream::ByteStream(const size_t capacity):_capacity(capacity) {
+ByteStream::ByteStream(const size_t capacity) : _capacity(capacity) {
     // DUMMY_CODE(capacity);
-
 }
 
 size_t ByteStream::write(const string &data) {
@@ -80,7 +79,7 @@ std::string ByteStream::read(const size_t len) {
     return period_string;
 }
 
-void ByteStream::end_input() {_end_input = true;}
+void ByteStream::end_input() { _end_input = true; }
 
 bool ByteStream::input_ended() const { return _end_input; }
 

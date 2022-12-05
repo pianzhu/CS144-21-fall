@@ -32,11 +32,11 @@ NetworkInterface::NetworkInterface(const EthernetAddress &ethernet_address, cons
 void NetworkInterface::send_datagram(const InternetDatagram &dgram, const Address &next_hop) {
     // convert IP address of next hop to raw 32-bit representation (used in ARP header)
     const uint32_t next_hop_ip = next_hop.ipv4_numeric();
-    const auto& _iter_arp = _arp_table.find(next_hop_ip);
+    const auto &_iter_arp = _arp_table.find(next_hop_ip);
     //! find the mac address in arp table
     if (_iter_arp != _arp_table.end()) {
         EthernetFrame _send_frame;
-        _send_frame .header().dst = _iter_arp->second._mac_address;
+        _send_frame.header().dst = _iter_arp->second._mac_address;
         _send_frame.header().src = _ethernet_address;
         _send_frame.header().type = EthernetHeader::TYPE_IPv4;
         _send_frame.payload() = dgram.serialize();
@@ -46,9 +46,9 @@ void NetworkInterface::send_datagram(const InternetDatagram &dgram, const Addres
     //! mac addr and ip addr of the next hop is not in arp table
     else {
         //! we need to send an arp request
-        const auto& iter = _waiting_response_datagram.find(next_hop_ip);
-        if (iter != _waiting_response_datagram.end()
-            && iter->second._time_since_last_ARP_request_send <= NetworkInterface::ARP_RESPONSE_TTL) {
+        const auto &iter = _waiting_response_datagram.find(next_hop_ip);
+        if (iter != _waiting_response_datagram.end() &&
+            iter->second._time_since_last_ARP_request_send <= NetworkInterface::ARP_RESPONSE_TTL) {
             _waiting_response_datagram[next_hop_ip]._waiting_response_datagram.push(dgram);
             return;
         }
@@ -57,7 +57,7 @@ void NetworkInterface::send_datagram(const InternetDatagram &dgram, const Addres
         _send_arp_message.sender_ethernet_address = _ethernet_address;
         _send_arp_message.sender_ip_address = _ip_address.ipv4_numeric();
         //! unknown ethernet address, so don't set target ethernet addr
-//            _send_arp_message.target_ethernet_address = {};
+        //            _send_arp_message.target_ethernet_address = {};
         _send_arp_message.target_ip_address = next_hop_ip;
         EthernetFrame _send_frame;
         _send_frame.header() = {/*dst*/ ETHERNET_BROADCAST,
@@ -94,14 +94,13 @@ optional<InternetDatagram> NetworkInterface::recv_frame(const EthernetFrame &fra
             return nullopt;
         }
 
-        const auto& _src_ip_addr = _recv_arp_message.sender_ip_address;
-        const auto& _src_mac_addr = _recv_arp_message.sender_ethernet_address;
+        const auto &_src_ip_addr = _recv_arp_message.sender_ip_address;
+        const auto &_src_mac_addr = _recv_arp_message.sender_ethernet_address;
         //! the type of arp message is reply
         //! NOTE:update arp table will be donw and deal with arp reply at the same time,
         //! so we can merge two operations
-        if (_recv_arp_message.opcode == ARPMessage::OPCODE_REPLY
-            && _recv_arp_message.target_ethernet_address == _ethernet_address)
-        {
+        if (_recv_arp_message.opcode == ARPMessage::OPCODE_REPLY &&
+            _recv_arp_message.target_ethernet_address == _ethernet_address) {
             const auto &_iter_arp = _arp_table.find(_src_ip_addr);
             if (_iter_arp != _arp_table.end()) {
                 _iter_arp->second._mac_address = _src_mac_addr;
@@ -123,8 +122,8 @@ optional<InternetDatagram> NetworkInterface::recv_frame(const EthernetFrame &fra
         }
 
         //! the type of arp message is request
-        if (_recv_arp_message.opcode == ARPMessage::OPCODE_REQUEST
-            && _recv_arp_message.target_ip_address == _ip_address.ipv4_numeric()) {
+        if (_recv_arp_message.opcode == ARPMessage::OPCODE_REQUEST &&
+            _recv_arp_message.target_ip_address == _ip_address.ipv4_numeric()) {
             ARPMessage _arp_reply_message;
             _arp_reply_message.opcode = ARPMessage::OPCODE_REPLY;
             _arp_reply_message.target_ip_address = _src_ip_addr;
@@ -138,15 +137,13 @@ optional<InternetDatagram> NetworkInterface::recv_frame(const EthernetFrame &fra
             _send_frame.payload() = _arp_reply_message.serialize();
             _frames_out.push(_send_frame);
 
-            const auto& _iter_arp = _arp_table.find(_src_ip_addr);
+            const auto &_iter_arp = _arp_table.find(_src_ip_addr);
             if (_iter_arp != _arp_table.end()) {
                 _iter_arp->second._mac_address = _src_mac_addr;
                 _iter_arp->second._ttl = 0;
-            }
-            else {
+            } else {
                 _arp_table[_src_ip_addr] = {0, _src_mac_addr};
             }
-
         }
     }
     return nullopt;
@@ -161,8 +158,7 @@ void NetworkInterface::tick(const size_t ms_since_last_tick) {
         iter->second._ttl += ms_since_last_tick;
         if (iter->second._ttl >= NetworkInterface::ARP_ENTRY_TTL) {
             iter = _arp_table.erase(iter);
-        }
-        else {
+        } else {
             iter++;
         }
     }
